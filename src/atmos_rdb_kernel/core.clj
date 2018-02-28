@@ -37,6 +37,13 @@
          (:generated_key key-inserted#)
          false))))
 
+(defmacro defget-entity
+  [entity args-fn get-persist-fn id-name]
+  (let [fn-name (fn-entity-symbol :get entity)]
+    `(defn- ~fn-name
+       ~args-fn
+       (~get-persist-fn {~id-name (first ~args-fn)}))))
+
 (defmacro defget-identity-entity
   [entity args-fn get-persist-fn id-name]
   (let [fn-name (fn-entity-symbol :get entity)]
@@ -54,12 +61,12 @@
            select))))
 
 (defmacro defupdate-entity
-  [entity args-fn update-persist-fn get-entity-fn]
+  [entity args-fn get-entity-fn update-persist-fn id-name]
   (let [fn-name (fn-entity-symbol :update entity)
         arg-fn (first args-fn)]
     `(defn- ~fn-name
        ~args-fn
-       (if-let [exists# (~get-entity-fn (:id ~arg-fn))]
+       (if-let [exists# (~get-entity-fn (~id-name ~arg-fn))]
          (do
            (~update-persist-fn ~arg-fn)
            true)
@@ -74,12 +81,12 @@
     false))
 
 (defmacro defremove-entity
-  [entity args-fn remove-persist-fn get-entity-fn]
+  [entity args-fn get-entity-fn remove-persist-fn id-name]
   (let [fn-name (fn-entity-symbol :remove entity)
         arg-fn (first args-fn)]
     `(defn- ~fn-name
        ~args-fn
-       (remove-cond-fn ~remove-persist-fn ~get-entity-fn {:id ~arg-fn} ~arg-fn))))
+       (remove-cond-fn ~remove-persist-fn ~get-entity-fn {~id-name ~arg-fn} ~arg-fn))))
 
 ;------------------------------
 ; END CRUD functions

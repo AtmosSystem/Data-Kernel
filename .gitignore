@@ -39,7 +39,7 @@ pom.xml.asc
 .idea/**/libraries
 
 .idea/libraries/*
-.idea
+.idea/*
 
 # CMake
 cmake-build-debug/
