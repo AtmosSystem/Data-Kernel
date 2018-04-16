@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/AtmosSystem/RDB-Kernel.svg?style=svg)](https://circleci.com/gh/AtmosSystem/RDB-Kernel)
+
+
 # rdb-kernel
 
 A Clojure library designed to ... well, that part is up to you.
