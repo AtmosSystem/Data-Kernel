@@ -1,6 +1,6 @@
 (defproject atmos-data-kernel "0.3.0-SNAPSHOT"
   :description "Data core functionality of Atmos System"
-  :url "https://github.com/AtmosSystem/RDB-Kernel"
+  :url "https://github.com/AtmosSystem/Data-Kernel"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
