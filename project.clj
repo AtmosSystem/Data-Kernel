@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  ;persistence-deps
                  [korma "0.4.3"]
-                 [mysql/mysql-connector-java "8.0.9"]]
+                 [mysql/mysql-connector-java "6.0.6"]]
   :repositories [["releases" {:url           "https://clojars.org/repo"
                               :username      :env/CLOJAR_USERNAME
                               :password      :env/CLOJAR_PASSWORD
