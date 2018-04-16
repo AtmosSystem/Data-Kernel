@@ -1,4 +1,4 @@
-(ns atmos-rdb-kernel.core
+(ns atmos-data-kernel.core
   (:require [korma.db :as sql]
             [korma.core :refer :all]))
 
