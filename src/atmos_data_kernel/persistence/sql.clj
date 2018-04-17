@@ -1,7 +1,6 @@
 (ns atmos-data-kernel.persistence.sql
-  (:require [korma.core :refer :all]))
-
-
+  (:require [atmos-data-kernel.persistence.core :refer :all]
+            [korma.core :refer :all]))
 
 
 ;------------------------------
@@ -9,41 +8,57 @@
 ;------------------------------
 
 (defmacro defadd-entity
-  [entity args-fn add-persist-fn]
-  (let [fn-name (fn-entity-symbol :add entity)]
+  "Define add entity function"
+  [entity]
+  (let [fn-name (entity-fn-name :add entity)
+        args '[data]]
     `(defn- ~fn-name
-       ~args-fn
-       (if-let [key-inserted# (~add-persist-fn (first ~args-fn))]
+       ~args
+       (if-let [key-inserted# (insert ~entity (values (first ~args)))]
          (:generated_key key-inserted#)
          false))))
 
+;------------------------------
+; END ADD functions
+;------------------------------
+
+;------------------------------
+; BEGIN GET functions
+;------------------------------
+
 (defmacro defget-entity
-  [entity args-fn get-persist-fn id-name]
-  (let [fn-name (fn-entity-symbol :get entity)]
+  "Define get entity function using persist function to retrieve values"
+  [entity persist-fn]
+  (let [fn-name (entity-fn-name :get entity)
+        id-name (:pk entity)
+        args '[data]]
     `(defn- ~fn-name
-       ~args-fn
-       (~get-persist-fn {~id-name (first ~args-fn)}))))
+       ~args
+       (~persist-fn {~id-name (first ~args)}))))
 
 (defmacro defget-identity-entity
-  [entity args-fn get-persist-fn id-name]
-  (let [fn-name (fn-entity-symbol :get entity)]
+  "Define get entity using persist function to retrieve the first one value"
+  [entity get-persist-fn]
+  (let [fn-name (entity-fn-name :get entity)
+        id-name (:pk entity)
+        args '[data]]
     `(defn- ~fn-name
-       ~args-fn
-       (first (~get-persist-fn {~id-name (first ~args-fn)})))))
+       ~args
+       (first (~get-persist-fn {~id-name (first ~args)})))))
 
 
 (defmacro defget-all-entity
-  [entity get-persist-base-fn]
-  (let [fn-name (fn-entity-symbol :get-all entity true)]
+  "Define get all entity function using persist function to retrieve values"
+  [entity get-persist-fn]
+  (let [fn-name (entity-fn-name :get-all entity false)]
     `(defn ~fn-name
        []
-       (-> ~get-persist-base-fn
-           select))))
+       (~get-persist-fn))))
+
 
 ;------------------------------
-; END CRUD functions
+; END GET functions
 ;------------------------------
-
 
 (defmacro defupdate-entity
   [entity args-fn get-entity-fn update-persist-fn id-name]

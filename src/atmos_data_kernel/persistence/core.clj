@@ -1,5 +1,6 @@
 (ns atmos-data-kernel.persistence.core
   (:require [atmos-data-kernel.core :refer [update-map]]
+            [clojure.string :refer [lower-case]]
             [korma.db :as sql]))
 
 (def ^:private init-persistences {:mysql sql/defdb})
@@ -16,6 +17,16 @@
   "Return persistence relational db class name"
   [persistence-type]
   (second (persistence-type persistence-types)))
+
+(defn entity-fn-name
+  "Return the entity function name"
+  ([type entity asterisk]
+   (let [type (lower-case (name type))
+         entity (lower-case (:name entity))]
+     (symbol (apply str [type "-" entity (if asterisk "*")]))))
+  ([type entity]
+   (entity-fn-name type entity true)))
+
 
 (defn defpersistence
   "Define persistence device map"
