@@ -1,16 +1,12 @@
-(ns atmos-data-kernel.relational.database
+(ns atmos-data-kernel.persistence.sql
   (:require [korma.core :refer :all]))
 
 
-;------------------------------
-; BEGIN CRUD functions
-;------------------------------
 
-(defn- fn-entity-symbol
-  ([type entity no-asterisk]
-   (symbol (apply str [(name type) "-" (name entity) (if-not no-asterisk "*")])))
-  ([type entity]
-   (fn-entity-symbol type entity false)))
+
+;------------------------------
+; BEGIN ADD functions
+;------------------------------
 
 (defmacro defadd-entity
   [entity args-fn add-persist-fn]
@@ -44,6 +40,11 @@
        (-> ~get-persist-base-fn
            select))))
 
+;------------------------------
+; END CRUD functions
+;------------------------------
+
+
 (defmacro defupdate-entity
   [entity args-fn get-entity-fn update-persist-fn id-name]
   (let [fn-name (fn-entity-symbol :update entity)
@@ -71,7 +72,3 @@
     `(defn- ~fn-name
        ~args-fn
        (remove-cond-fn ~remove-persist-fn ~get-entity-fn {~id-name ~arg-fn} ~arg-fn))))
-
-;------------------------------
-; END CRUD functions
-;------------------------------
