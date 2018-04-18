@@ -2,7 +2,7 @@
 
 
 # Data-Kernel
-[![Clojars Project](https://img.shields.io/clojars/v/atmos-data-kernel.svg)](https://clojars.org/atmos-rdb-kernel)
+[![Clojars Project](https://img.shields.io/clojars/v/atmos-data-kernel.svg)](https://clojars.org/atmos-data-kernel)
 [![Dependencies Status](https://versions.deps.co/AtmosSystem/Data-Kernel/status.png)](https://versions.deps.co/AtmosSystem/Data-Kernel)
 
 This library is the **relational database** core of atmos systems, it has commons functionality.
