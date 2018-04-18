@@ -28,32 +28,32 @@
 
 (defmacro defget-entity
   "Define get entity function using persist function to retrieve values"
-  [entity persist-fn]
-  (let [fn-name (entity-fn-name :get entity)
-        id-name (:pk entity)
-        args '[data]]
-    `(defn- ~fn-name
-       ~args
-       (~persist-fn {~id-name (first ~args)}))))
+  ([entity select-fn args-fn]
+   (let [fn-name (entity-fn-name :get entity)]
+     `(defn- ~fn-name
+        ~args-fn
+        (apply ~select-fn ~args-fn))))
+  ([entity select-fn]
+   (defget-entity entity select-fn '[data])))
 
 (defmacro defget-identity-entity
   "Define get entity using persist function to retrieve the first one value"
-  [entity get-persist-fn]
-  (let [fn-name (entity-fn-name :get-first entity)
-        id-name (:pk entity)
-        args '[data]]
-    `(defn- ~fn-name
-       ~args
-       (first (~get-persist-fn {~id-name (first ~args)})))))
+  ([entity select-fn args-fn]
+   (let [fn-name (entity-fn-name :get-first entity)]
+     `(defn- ~fn-name
+        ~args-fn
+        (first (apply ~select-fn ~args-fn)))))
+  ([entity select-fn]
+   (defget-identity-entity entity select-fn '[data])))
 
 
 (defmacro defget-all-entity
   "Define get all entity function using persist function to retrieve values"
-  [entity get-persist-fn]
+  [entity select-fn]
   (let [fn-name (entity-fn-name :get-all entity false)]
     `(defn ~fn-name
        []
-       (~get-persist-fn))))
+       (~select-fn))))
 
 
 ;------------------------------
@@ -62,17 +62,17 @@
 
 (defmacro defupdate-entity
   "Define an update entity function"
-  ([entity id-name]
+  ([entity key-id-name]
    (let [fn-name (entity-fn-name :update entity)
          get-first-fn (entity-fn-name :get-first entity)
          args '[data]]
      `(defn- ~fn-name
         ~args
-        (if-let [exists# (~get-first-fn (~id-name (first ~args)))]
+        (if-let [exists# (apply ~get-first-fn ~args)]
           (do
             (update ~entity
                     (set-fields (first ~args))
-                    (where {~id-name (~id-name (first ~args))}))
+                    (where {~key-id-name (~key-id-name (first ~args))}))
             true)
           false))))
   ([entity]
@@ -80,16 +80,16 @@
 
 (defmacro defremove-entity
   "Define a remove entity function"
-  ([entity id-name]
+  ([entity key-id-name]
    (let [fn-name (entity-fn-name :remove entity)
          get-first-fn (entity-fn-name :get-first entity)
          args '[data]]
      `(defn- ~fn-name
         ~args
-        (if-let [exists# (~get-first-fn (~id-name (first ~args)))]
+        (if-let [exists# (apply ~get-first-fn ~args)]
           (do
             (delete ~entity
-                    (where {~id-name (~id-name (first ~args))}))
+                    (where {~key-id-name (~key-id-name (first ~args))}))
             true)
           false))))
   ([entity]
