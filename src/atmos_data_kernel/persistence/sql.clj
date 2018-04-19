@@ -10,7 +10,7 @@
 (defmacro defadd-entity
   "Define add entity function"
   [entity]
-  (let [fn-name (entity-fn-name :add entity)
+  (let [fn-name (entity-fn-name :add (keyword entity))
         args '[data]]
     `(defn- ~fn-name
        ~args
@@ -29,7 +29,7 @@
 (defmacro defget-entity
   "Define get entity function using persist function to retrieve values"
   ([entity select-fn args-fn]
-   (let [fn-name (entity-fn-name :get entity)]
+   (let [fn-name (entity-fn-name :get (keyword entity))]
      `(defn- ~fn-name
         ~args-fn
         (apply ~select-fn ~args-fn))))
@@ -39,7 +39,7 @@
 (defmacro defget-identity-entity
   "Define get entity using persist function to retrieve the first one value"
   ([entity select-fn args-fn]
-   (let [fn-name (entity-fn-name :get-first entity)]
+   (let [fn-name (entity-fn-name :get-first (keyword entity))]
      `(defn- ~fn-name
         ~args-fn
         (first (apply ~select-fn ~args-fn)))))
@@ -50,7 +50,7 @@
 (defmacro defget-all-entity
   "Define get all entity function using persist function to retrieve values"
   [entity select-fn]
-  (let [fn-name (entity-fn-name :get-all entity false)]
+  (let [fn-name (entity-fn-name :get-all (keyword entity) false)]
     `(defn ~fn-name
        []
        (~select-fn))))
@@ -63,8 +63,8 @@
 (defmacro defupdate-entity
   "Define an update entity function"
   ([entity key-id-name]
-   (let [fn-name (entity-fn-name :update entity)
-         get-first-fn (entity-fn-name :get-first entity)
+   (let [fn-name (entity-fn-name :update (keyword entity))
+         get-first-fn (entity-fn-name :get-first (keyword entity))
          args '[data]]
      `(defn- ~fn-name
         ~args
@@ -81,8 +81,8 @@
 (defmacro defremove-entity
   "Define a remove entity function"
   ([entity key-id-name]
-   (let [fn-name (entity-fn-name :remove entity)
-         get-first-fn (entity-fn-name :get-first entity)
+   (let [fn-name (entity-fn-name :remove (keyword entity))
+         get-first-fn (entity-fn-name :get-first (keyword entity))
          args '[data]]
      `(defn- ~fn-name
         ~args

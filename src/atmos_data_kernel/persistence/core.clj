@@ -22,7 +22,7 @@
   "Return the entity function name"
   ([type entity asterisk]
    (let [type (lower-case (name type))
-         entity (lower-case (:name entity))]
+         entity (lower-case (name entity))]
      (symbol (apply str [type "-" entity (if asterisk "*")]))))
   ([type entity]
    (entity-fn-name type entity true)))

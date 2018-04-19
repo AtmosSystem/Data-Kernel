@@ -1,4 +1,4 @@
-(defproject atmos-data-kernel "0.5.2"
+(defproject atmos-data-kernel "0.5.3"
   :description "Data core functionality of Atmos System"
   :url "https://github.com/AtmosSystem/Data-Kernel"
   :license {:name "Eclipse Public License"
