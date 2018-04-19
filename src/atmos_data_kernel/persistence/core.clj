@@ -3,7 +3,7 @@
             [clojure.string :refer [lower-case]]
             [korma.db :as sql]))
 
-(def ^:private init-persistences {:mysql sql/defdb})
+(def ^:private init-persistences {:mysql 'sql/defdb})
 
 (def ^:private persistence-types {:mysql [sql/mysql
                                           "com.mysql.cj.jdbc.Driver"]})
@@ -37,11 +37,11 @@
                            :mysql (update-map persistence-data
                                               :classname
                                               #(str classname %)))]
-    (persistence-fn persistence-data)))
+    (apply persistence-fn [persistence-data])))
 
 (defn init-persistence
   "Initialize the persistence device"
   [persistence-type persistence-definition]
   (let [init-fn (persistence-type init-persistences)]
-    (init-fn persistence-definition)))
+    (apply init-fn [persistence-definition])))
 
