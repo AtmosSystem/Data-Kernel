@@ -41,7 +41,8 @@
 
 (defn init-persistence
   "Initialize the persistence device"
-  [persistence-type persistence-definition]
-  (let [init-fn (persistence-type init-persistences)]
-    (apply init-fn [persistence-definition])))
+  [persistence-device-name persistence-definition]
+  (let [persistence-type (keyword (or (:subprotocol persistence-definition) (:protocol persistence-definition)))
+        init-fn (persistence-type init-persistences)]
+    (apply init-fn [(symbol persistence-device-name) persistence-definition])))
 
