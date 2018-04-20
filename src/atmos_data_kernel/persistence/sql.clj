@@ -1,6 +1,14 @@
 (ns atmos-data-kernel.persistence.sql
   (:require [atmos-data-kernel.persistence.core :refer :all]
-            [korma.core :refer :all]))
+            [korma.core :refer :all]
+            [korma.db :refer [defdb]]))
+
+
+
+(defn init-sql-persistence
+  "Initialize the persistence device"
+  [persistence-device-name persistence-definition]
+  (defdb persistence-device-name persistence-definition))
 
 
 ;------------------------------
