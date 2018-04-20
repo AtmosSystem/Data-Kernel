@@ -1,11 +1,9 @@
 (ns atmos-data-kernel.persistence.core
   (:require [atmos-data-kernel.core :refer [update-map]]
             [clojure.string :refer [lower-case]]
-            [korma.db :as sql]))
+            [korma.db :refer [mysql]]))
 
-(def ^:private init-persistences {:mysql 'sql/defdb})
-
-(def ^:private persistence-types {:mysql [sql/mysql
+(def ^:private persistence-types {:mysql [mysql
                                           "com.mysql.cj.jdbc.Driver"]})
 
 (defn- persistence-dialect
@@ -38,11 +36,4 @@
                                               :classname
                                               #(str classname %)))]
     (apply persistence-fn [persistence-data])))
-
-(defn init-persistence
-  "Initialize the persistence device"
-  [persistence-device-name persistence-definition]
-  (let [persistence-type (keyword (or (:subprotocol persistence-definition) (:protocol persistence-definition)))
-        init-fn (persistence-type init-persistences)]
-    (apply init-fn [(symbol persistence-device-name) persistence-definition])))
 
