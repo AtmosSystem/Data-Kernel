@@ -4,13 +4,6 @@
             [korma.db :refer [defdb]]))
 
 
-
-(defn init-sql-persistence
-  "Initialize the persistence device"
-  [persistence-device-name persistence-definition]
-  (defdb persistence-device-name persistence-definition))
-
-
 ;------------------------------
 ; BEGIN ADD functions
 ;------------------------------
