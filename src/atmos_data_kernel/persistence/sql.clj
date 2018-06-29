@@ -69,7 +69,7 @@
          args '[data]]
      `(defn- ~fn-name
         ~args
-        (if-let [exists# (apply ~get-first-fn ~args)]
+        (if-let [exists# (apply ~get-first-fn [(~key-id-name (first ~args))])]
           (do
             (update ~entity
                     (set-fields (first ~args))
@@ -87,7 +87,7 @@
          args '[data]]
      `(defn- ~fn-name
         ~args
-        (if-let [exists# (apply ~get-first-fn ~args)]
+        (if-let [exists# (apply ~get-first-fn [(~key-id-name (first ~args))])]
           (do
             (delete ~entity
                     (where {~key-id-name (~key-id-name (first ~args))}))
