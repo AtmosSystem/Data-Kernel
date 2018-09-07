@@ -13,7 +13,7 @@
   [entity]
   (let [fn-name (entity-fn-name :add (keyword entity))
         args '[data]]
-    `(defn- ~fn-name
+    `(defn ~fn-name
        ~args
        (if-let [key-inserted# (insert ~entity (values (first ~args)))]
          (:generated_key key-inserted#)
@@ -31,7 +31,7 @@
   "Define get entity function using persist function to retrieve values"
   ([entity select-fn args-fn]
    (let [fn-name (entity-fn-name :get (keyword entity))]
-     `(defn- ~fn-name
+     `(defn ~fn-name
         ~args-fn
         (apply ~select-fn ~args-fn))))
   ([entity select-fn]
@@ -41,7 +41,7 @@
   "Define get entity using persist function to retrieve the first one value"
   ([entity select-fn args-fn]
    (let [fn-name (entity-fn-name :get-first (keyword entity))]
-     `(defn- ~fn-name
+     `(defn ~fn-name
         ~args-fn
         (first (apply ~select-fn ~args-fn)))))
   ([entity select-fn]
@@ -67,7 +67,7 @@
    (let [fn-name (entity-fn-name :update (keyword entity))
          get-first-fn (entity-fn-name :get-first (keyword entity))
          args '[data]]
-     `(defn- ~fn-name
+     `(defn ~fn-name
         ~args
         (if-let [exists# (apply ~get-first-fn [(~key-id-name (first ~args))])]
           (do
@@ -85,7 +85,7 @@
    (let [fn-name (entity-fn-name :remove (keyword entity))
          get-first-fn (entity-fn-name :get-first (keyword entity))
          args '[data]]
-     `(defn- ~fn-name
+     `(defn ~fn-name
         ~args
         (if-let [exists# (apply ~get-first-fn [(~key-id-name (first ~args))])]
           (do

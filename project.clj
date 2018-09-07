@@ -1,4 +1,4 @@
-(defproject atmos-data-kernel "0.5.7"
+(defproject atmos-data-kernel "0.5.8"
   :description "Data core functionality of Atmos System"
   :url "https://github.com/AtmosSystem/Data-Kernel"
   :license {:name "Eclipse Public License"
@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  ;persistence-deps
                  [korma "0.4.3"]
-                 [mysql/mysql-connector-java "8.0.8-dmr"]]
+                 [mysql/mysql-connector-java "8.0.12"]]
   :repositories [["releases" {:url           "https://clojars.org/repo"
                               :username      :env/CLOJAR_USERNAME
                               :password      :env/CLOJAR_PASSWORD
