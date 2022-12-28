@@ -1,5 +1,8 @@
 (ns atmos-data-kernel.conversions)
 
-(defprotocol PDataIDConversion
-  (data-with-id [data])
+(defprotocol PIdentifierConversion
+  (with-id [data])
   (to-entity-id [data]))
+
+(defprotocol PFilterConversion
+  (map-filters [data]))

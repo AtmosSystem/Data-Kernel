@@ -4,7 +4,8 @@
 
 (defprotocol PDataDevice
   "This represent a data persistence device"
-  (open [device]))
+  (open [device])
+  (with-repository [device handler]))
 
 (defprotocol PDataDeviceConnection
   (repository [connection repository-name])
@@ -12,16 +13,14 @@
 
 (defprotocol PSimpleDataRepository
   "Represent a structure to make operations over the persistence device"
-  (with-repository [device handler])
   (get-all [device] [device options])
   (get-by [device pred] [device pred options])
   (get-one [device pred] [device pred options])
   (add-data [device data-unit])
-  (edit-data [device data-unit])
-  (delete-data [device data-unit]))
+  (edit-data [device pred data-unit])
+  (delete-data [device pred] [device]))
 
 (defprotocol PKeyValueDataRepository
-  (with-repository [device handler])
   (key-exists? [device key])
   (get-keys [device] [device options])
   (get-keys-by [device re] [device re options])
