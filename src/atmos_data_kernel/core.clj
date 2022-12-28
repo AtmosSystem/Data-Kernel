@@ -12,15 +12,16 @@
 
 (defprotocol PSimpleDataRepository
   "Represent a structure to make operations over the persistence device"
+  (with-repository [device handler])
   (get-all [device] [device options])
   (get-by [device pred] [device pred options])
   (get-one [device pred] [device pred options])
   (add-data [device data-unit])
   (edit-data [device data-unit])
-  (delete-data [device data-unit])
-  (with-repository [device handler]))
+  (delete-data [device data-unit]))
 
 (defprotocol PKeyValueDataRepository
+  (with-repository [device handler])
   (key-exists? [device key])
   (get-keys [device] [device options])
   (get-keys-by [device re] [device re options])
