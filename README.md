@@ -2,15 +2,14 @@
 
 # Data-Kernel
 
-[![Clojars Project](https://img.shields.io/clojars/v/org.clojars.atmos-system/atmos-data-kernel.svg)](https://clojars.org/org.clojars.atmos-system/atmos-data-kernel)
 [![Dependencies Status](https://versions.deps.co/AtmosSystem/Data-Kernel/status.svg)](https://versions.deps.co/AtmosSystem/Data-Kernel)
 
-This library is the **relational database** core of atmos systems, it has commons functionality.
+This library is the data core of atmos systems, it has commons functionality.
 
 ## Installation
 
 ```clojure
-[atmos-data-kernel "x.x.x"] ; See clojars version
+[atmos-data-kernel "x.x.x"]
 ```
 
 ## License
