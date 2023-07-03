@@ -1,4 +1,4 @@
-(defproject atmos-data-kernel "1.0-SNAPSHOT"
+(defproject org.clojars.atmos-system/atmos-data-kernel "1.0-SNAPSHOT"
   :description "Data core functionality of Atmos System"
   :url "https://github.com/AtmosSystem/Data-Kernel"
   :license {:name "Eclipse Public License"
