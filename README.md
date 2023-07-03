@@ -1,9 +1,9 @@
-[![CircleCI](https://circleci.com/gh/AtmosSystem/Data-Kernel.svg?style=svg)](https://circleci.com/gh/AtmosSystem/Data-Kernel)
-
+[![Atmos Kernel CI](https://github.com/AtmosSystem/Data-Kernel/actions/workflows/release.yml/badge.svg)](https://github.com/AtmosSystem/Data-Kernel/actions/workflows/release.yml)
 
 # Data-Kernel
-[![Clojars Project](https://img.shields.io/clojars/v/atmos-data-kernel.svg)](https://clojars.org/atmos-data-kernel)
-[![Dependencies Status](https://versions.deps.co/AtmosSystem/Data-Kernel/status.png)](https://versions.deps.co/AtmosSystem/Data-Kernel)
+
+[![Clojars Project](https://img.shields.io/clojars/v/org.clojars.atmos-system/atmos-data-kernel.svg)](https://clojars.org/org.clojars.atmos-system/atmos-data-kernel)
+[![Dependencies Status](https://versions.deps.co/AtmosSystem/Data-Kernel/status.svg)](https://versions.deps.co/AtmosSystem/Data-Kernel)
 
 This library is the **relational database** core of atmos systems, it has commons functionality.
 
