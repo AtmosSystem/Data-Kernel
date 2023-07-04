@@ -1,4 +1,4 @@
-[![Atmos Kernel CI](https://github.com/AtmosSystem/Data-Kernel/actions/workflows/release.yml/badge.svg)](https://github.com/AtmosSystem/Data-Kernel/actions/workflows/release.yml)
+[![CI](https://github.com/AtmosSystem/Data-Kernel/actions/workflows/release.yml/badge.svg)](https://github.com/AtmosSystem/Data-Kernel/actions/workflows/release.yml)
 
 # Data-Kernel
 
