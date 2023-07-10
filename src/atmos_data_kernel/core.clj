@@ -5,7 +5,8 @@
 (defprotocol PDataDevice
   "This represent a data persistence device"
   (open [device])
-  (with-repository [device handler]))
+  (with-repository [device handler])
+  (connection-successfully? [device]))
 
 (defprotocol PDataDeviceConnection
   (repository [connection repository-name])
