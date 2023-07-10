@@ -26,8 +26,9 @@
   (get-keys [device] [device options])
   (get-keys-by [device re] [device re options])
   (delete-key [device key])
-  (get-key-value [device key] [device key options])
-  (set-key-value [device key value] [device key value options]))
+  (get-key-value [device key])
+  (set-key-value [device key value])
+  (set-key-property [device key property value]))
 
 (defn data-devices
   [device-services]
