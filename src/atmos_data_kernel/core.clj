@@ -29,12 +29,12 @@
   (get-key-value [device key] [device key options])
   (set-key-value [device key value] [device key value options]))
 
-(defn data-device
-  [device-service]
-  (let [[device-ns device-fn] (map symbol (-> device-service str (string/split #"/")))]
+(defn data-devices
+  [device-services]
+  (let [[device-ns device-fn] (map symbol (-> device-services str (string/split #"/")))]
     (use [device-ns :only [device-fn]])
     (var-get (ns-resolve device-ns device-fn))))
 
-(s/fdef data-device
+(s/fdef data-devices
         :args (s/cat :device-service symbol?)
         :ret var?)
